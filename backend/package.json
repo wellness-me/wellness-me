@@ -1,0 +1,19 @@
+{
+  "name": "backend-for-wellness-me",
+  "version": "1.0.0",
+  "description": "Discover your life through daily data! ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wellness-me/wellness-me.git"
+  },
+  "author": "colinX2, Elvis, Matan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wellness-me/wellness-me/issues"
+  },
+  "homepage": "https://github.com/wellness-me/wellness-me#readme"
+}
