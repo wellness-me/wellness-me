@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userDataSchema = new Schema({
-    // userID is string of Mongo UUID
+    // userID is string of Mongo UUID for user
     userID: {
         type: String,
         index: true
@@ -17,7 +17,10 @@ const userDataSchema = new Schema({
     exercise: {
         type: Number,
         required: true
-    }
+    },
+}, { 
+    // store time object was created and updated
+    timestamps: true 
 })
 
 const UserData = new mongoose.model("UserData", userDataSchema, "user-data")
