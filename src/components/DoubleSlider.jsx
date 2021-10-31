@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { Slider } from "react-semantic-ui-range";
 
-const App = props => {
-
+const DoubleSlider = (props) => {
+  // TODO: depricate in favor of SleepSlider
+  const [sliderVals, setSliderVals] = useState([5, 15])
+  
+  console.log(sliderVals)
   const settings = {
-    start: [5, 15],
+    start: sliderVals,
     min: 0,
     max: 20,
-    step: 1
+    step: 1,
+    onChange: value => {
+        setSliderVals(value);
+    }
   };
 
   return (
@@ -15,4 +21,4 @@ const App = props => {
   );
 };
 
-export default App;
+export default DoubleSlider;

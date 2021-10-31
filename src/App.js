@@ -3,8 +3,16 @@ import Journal from './components/Journal.jsx'
 import Sleep from './components/Sleep.jsx'
 import Slider from './components/Slider.jsx'
 import './App.css';
+import React, {useState} from 'react';
 
-function App() {
+const App = () => {
+  const [ daySlider, setDaySlider ] = useState(50);
+  const [ sleepSlider, setSleepSlider ] = useState(7);
+  const [ journalText, setJournalText ] = useState("")
+  console.log(sleepSlider)
+  console.log(daySlider)
+  console.log(journalText)
+
   return (
     <div className="App">
     <NavBar />
@@ -12,7 +20,7 @@ function App() {
     <h3 className="greeting">Good afternoon, Eggert.</h3>
     <div className="happiness-slider">
       <h5>How was your day?</h5>
-      <Slider />
+      <Slider value={daySlider} setValue={setDaySlider} />
       <div className="face-icons">
         <div className="face-icon" id="sad-face">:(</div>
         <div className="face-icon" id="happy-face">:)</div>
@@ -21,10 +29,10 @@ function App() {
     
     <div className="input-form">
       <div className="column 1">
-        <Journal />
+        <Journal value={journalText} setValue={setJournalText} />
       </div>
       <div className="column 2">
-        <Sleep />
+        <Sleep value={sleepSlider} setValue={setSleepSlider} />
       </div>
     </div>
 
@@ -35,4 +43,5 @@ function App() {
     </div>
   );
 }
+
 export default App;

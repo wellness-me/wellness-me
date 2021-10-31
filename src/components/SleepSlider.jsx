@@ -1,19 +1,20 @@
 import React from 'react';
 import RangeSlider from 'react-bootstrap-range-slider';
 
-const Slider = (props) => {
-  
+const SleepSlider = (props) => {
+
   return (
     <RangeSlider
       value={props.value}
+      min={0}
+      max={10}
       onChange={changeEvent => props.setValue(changeEvent.target.value)}
       tooltip='auto'
       tooltipPlacement='bottom'
-      step={10}
+      step={.25}
       variant='warning'
       style= {{marginTop: '25px'}}
     />
   );
 };
-
-export default Slider;
+export default SleepSlider;
