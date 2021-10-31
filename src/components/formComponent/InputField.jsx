@@ -3,7 +3,8 @@ import { Input } from 'semantic-ui-react'
 
 class InputField extends React.Component {
 
-    constructor() {
+    constructor(props) {
+        super(props)
         this.state = {
             value: null
         }
