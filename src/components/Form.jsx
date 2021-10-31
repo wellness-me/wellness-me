@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Input } from 'semantic-ui-react'
+import { Input, Button } from 'semantic-ui-react'
 
-const Form = (props) => {
+const Form = () => {
     const [sleep, setSleep] = useState("")
     const [exercise, setExercise] = useState("")
 
@@ -11,12 +11,12 @@ const Form = (props) => {
             "exercise": exercise
         }
 
-        await fetch("http://localhost:5000/v1/data/", {
+        const r = await fetch("http://localhost:5000/v1/data/", {
             method: "POST",
             body: data,
         })
+        console.log(r.json())
     }
-
 
     return (
         <div>
@@ -27,6 +27,8 @@ const Form = (props) => {
             <div>
                 <Input focus placeholder='Happiness' onChange={(e) => setExercise(e.target.value) } />
             </div>
+    
+            <Button primary onClick={postToAPI}>Submit Form</Button>
 
         </div>
     )
