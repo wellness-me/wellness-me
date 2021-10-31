@@ -1,7 +1,7 @@
 import './App.css';
 import DataInputPage from './components/DataInputPage';
-import Header from 'Header.jsx'
-import UserBox from 'UserBox.jsx'
+import Header from './components/Header'
+import UserBox from './components/UserBox'
 /**for now fiexed to data input page, later we can make this change, not sure this is the correct control structure. Actually, should prob move header and userBox here */
 
 function App() {
