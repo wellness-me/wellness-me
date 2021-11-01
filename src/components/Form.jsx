@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
+
 import Journal from './Journal.jsx'
 import Sleep from './Sleep.jsx'
 import Slider from './Slider.jsx'
 
 const Form = () => {
-
     const [ daySlider, setDaySlider ] = useState(50);
     const [ sleepSlider, setSleepSlider ] = useState(7);
     const [ journalText, setJournalText ] = useState("")
     console.log(sleepSlider)
     console.log(daySlider)
     console.log(journalText)
-    // todo: make this only accessible if we've logged in
 
     const postToAPI = async () => {
         const data = {
