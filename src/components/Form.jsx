@@ -1,36 +1,58 @@
 import React, { useState } from 'react';
-import { Input, Button } from 'semantic-ui-react'
+import Journal from './Journal.jsx'
+import Sleep from './Sleep.jsx'
+import Slider from './Slider.jsx'
 
 const Form = () => {
+
+    const [ daySlider, setDaySlider ] = useState(50);
+    const [ sleepSlider, setSleepSlider ] = useState(7);
+    const [ journalText, setJournalText ] = useState("")
+    console.log(sleepSlider)
+    console.log(daySlider)
+    console.log(journalText)
     // todo: make this only accessible if we've logged in
-    const [sleep, setSleep] = useState("")
-    const [exercise, setExercise] = useState("")
 
     const postToAPI = async () => {
         const data = {
-            "sleep": sleep,
-            "exercise": exercise
+            "sleep": sleepSlider,
+            // "exercise": exercise,
+            "journal": journalText,
+            "happiness": daySlider,
         }
 
         const r = await fetch("http://localhost:5000/v1/data/", {
             method: "POST",
-            body: data,
+            body: JSON.stringify(data),
         })
         console.log(r.json())
     }
 
     return (
         <div>
-            <div>
-                <Input focus placeholder='Sleep' onChange={(e) => setSleep(e.target.value) } />
+            <br/>
+            <h3 className="greeting">Good afternoon, Eggert.</h3>
+            <div className="happiness-slider">
+                <h5>How was your day?</h5>
+                <Slider value={daySlider} setValue={setDaySlider} />
+                <div className="face-icons">
+                    <div className="face-icon" id="sad-face">:(</div>
+                    <div className="face-icon" id="happy-face">:)</div>
+                </div>
             </div>
 
-            <div>
-                <Input focus placeholder='Happiness' onChange={(e) => setExercise(e.target.value) } />
+            <div className="input-form">
+                <div className="column 1">
+                    <Journal value={journalText} setValue={setJournalText} />
+                </div>
+                <div className="column 2">
+                    <Sleep value={sleepSlider} setValue={setSleepSlider} />
+                </div>
             </div>
-    
-            <Button primary onClick={postToAPI}>Submit Form</Button>
 
+            <div id="submit-button">
+                <button type="button" class="btn btn-primary" onClick={postToAPI}>Submit!</button>
+            </div>
         </div>
     )
 }

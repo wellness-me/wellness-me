@@ -50,9 +50,7 @@ const Login = () => {
     return (
         <div>
             <h1>Login to Wellness-Me</h1>
-
             {messageFailed()}
-
             <div>
                 <p>Username</p>
                 <Input focus placeholder='Username' onChange={(e) => setUsername(e.target.value) } />
@@ -66,10 +64,6 @@ const Login = () => {
             <div>
                 <Button primary onClick={handleSubmit}>Login</Button>
             </div>
-
-
-
-
         </div>
     )
 }
