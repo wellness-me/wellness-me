@@ -1,23 +1,45 @@
-import logo from './logo.svg';
+import NavBar from './components/NavBar.jsx'
+import Journal from './components/Journal.jsx'
+import Sleep from './components/Sleep.jsx'
+import Slider from './components/Slider.jsx'
 import './App.css';
+import React, {useState} from 'react';
 
-function App() {
+const App = () => {
+  const [ daySlider, setDaySlider ] = useState(50);
+  const [ sleepSlider, setSleepSlider ] = useState(7);
+  const [ journalText, setJournalText ] = useState("")
+  console.log(sleepSlider)
+  console.log(daySlider)
+  console.log(journalText)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <NavBar />
+    <br/>
+    <h3 className="greeting">Good afternoon, Eggert.</h3>
+    <div className="happiness-slider">
+      <h5>How was your day?</h5>
+      <Slider value={daySlider} setValue={setDaySlider} />
+      <div className="face-icons">
+        <div className="face-icon" id="sad-face">:(</div>
+        <div className="face-icon" id="happy-face">:)</div>
+      </div>
+    </div>
+    
+    <div className="input-form">
+      <div className="column 1">
+        <Journal value={journalText} setValue={setJournalText} />
+      </div>
+      <div className="column 2">
+        <Sleep value={sleepSlider} setValue={setSleepSlider} />
+      </div>
+    </div>
+
+    <div id="submit-button">
+      <button type="button" class="btn btn-primary">Submit!</button>
+    </div>
+    
     </div>
   );
 }
