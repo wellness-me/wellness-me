@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import Journal from './Journal.jsx'
 import Sleep from './Sleep.jsx'
 import Slider from './Slider.jsx'
+import Exercise from './Exercise.jsx';
 
 const Form = () => {
 
+    const [ exerciseSlider, setExerciseSlider ] = useState(30);
     const [ daySlider, setDaySlider ] = useState(50);
     const [ sleepSlider, setSleepSlider ] = useState(7);
     const [ journalText, setJournalText ] = useState("")
+    console.log(exerciseSlider)
     console.log(sleepSlider)
     console.log(daySlider)
     console.log(journalText)
@@ -16,7 +19,7 @@ const Form = () => {
     const postToAPI = async () => {
         const data = {
             "sleep": sleepSlider,
-            // "exercise": exercise,
+            "exercise": exerciseSlider,
             "journal": journalText,
             "happiness": daySlider,
         }
@@ -47,6 +50,9 @@ const Form = () => {
                 </div>
                 <div className="column 2">
                     <Sleep value={sleepSlider} setValue={setSleepSlider} />
+                </div>
+                <div className="column 3">
+                    <Exercise value={exerciseSlider} setValue={setExerciseSlider} />
                 </div>
             </div>
 
