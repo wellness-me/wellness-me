@@ -9,7 +9,7 @@ const SleepSlider = (props) => {
       min={0}
       max={10}
       onChange={changeEvent => props.setValue(changeEvent.target.value)}
-      tooltip='auto'
+      tooltip='on'
       tooltipPlacement='bottom'
       step={.25}
       variant='warning'

@@ -8,7 +8,7 @@ const ExerciseSlider = (props) => {
             min={0}
             max={120}
             onChange={changeEvent => props.setValue(changeEvent.target.value)}
-            tooltip='auto'
+            tooltip='on'
             tooltipPlacement='bottom'
             step={5}
             variant='warning'

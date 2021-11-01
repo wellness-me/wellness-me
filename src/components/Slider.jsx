@@ -7,7 +7,7 @@ const Slider = (props) => {
     <RangeSlider
       value={props.value}
       onChange={changeEvent => props.setValue(changeEvent.target.value)}
-      tooltip='auto'
+      tooltip='on'
       tooltipPlacement='bottom'
       step={10}
       variant='warning'

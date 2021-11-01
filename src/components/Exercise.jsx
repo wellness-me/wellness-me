@@ -10,16 +10,17 @@ const Exercise = (props) => {
             <br/>
             <small class="text-muted">Click and drag the slider to match the minutes of exercise you did today.</small>
             <br/><br/>
-            <Form>
+            <ExerciseSlider value={props.value} setValue={props.setValue} />
+            {/* <Form>
                 <Form.Group as={Row}>
-                    <Col xs="9">
+                    <Col xs="8">
                         <ExerciseSlider value={props.value} setValue={props.setValue} />
                     </Col>
                     <Col xs="3">
                         <Form.Control value={props.value} />
                     </Col>
                 </Form.Group>
-            </Form>
+            </Form> */}
         </div>
 
     );
