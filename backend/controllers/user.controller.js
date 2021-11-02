@@ -29,7 +29,11 @@ const registerUser = async (req, res) => {
     );
     user.token = token
 
-    res.cookie("token", token, {httpOnly: false, secure: false}).status(httpStatus.CREATED).send(user)
+    res
+        // .cookie("token", token, {httpOnly: false, secure: false})
+        // .cookie("username", username, {httpOnly: true})
+        .status(httpStatus.CREATED)
+        .send(user)
 }
 
 const loginUser = async (req, res) => {
@@ -54,7 +58,11 @@ const loginUser = async (req, res) => {
             }
         );
         user.token = token
-        res.cookie("token", token, {httpOnly: true}).status(httpStatus.OK).send(user)
+
+        // res.cookie("username", username, {httpOnly: false})
+        // res.cookie("token", token, {httpOnly: false})
+        res.status(httpStatus.OK)
+        res.send(user)
     }
     else {
         // passwords don't match, login failed

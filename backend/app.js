@@ -7,7 +7,7 @@ const app = express()
 app.use(cors({
     origin: '*'
 }));
-// app.use(cookieParser());
+app.use(cookieParser());
 
 app.use(express.json())
 app.use('/v1', routes);

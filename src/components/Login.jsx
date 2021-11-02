@@ -19,15 +19,21 @@ const Login = () => {
         const r = await fetch("http://localhost:5000/v1/users/login/", {
             method: "POST",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(data)
         })
+
         if (r.status === 200) {
             const json = await r.json()
             const cookies = new Cookies();
 
+            console.log(r.cookies)
+
             cookies.set("token", json.token)
+            cookies.set("username", json.username)
+            cookies.set("userid", json._id)
+            
             setLoginFailed(false)
             history.push("/form")
         }
