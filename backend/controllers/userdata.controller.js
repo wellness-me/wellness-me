@@ -6,6 +6,7 @@ const logger = require("../utils/logger")
 // from the form for this user
 const createData = async (req, res) => {
     logger.info("POST /v1/data/")
+    // console.log(req.body)
 
     const data = new UserData(req.body)
 

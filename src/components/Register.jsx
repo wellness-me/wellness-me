@@ -24,17 +24,14 @@ const Register = () => {
         })
         if (r.status === 201) {
             const json = await r.json()
-            // console.log(r.json())
             const cookies = new Cookies();
 
             cookies.set("token", json.token)
+            cookies.set("username", json.username)
+            cookies.set("userid", json._id)
+
             history.push("/form")
         }
-        
-
-        
-
-        
     }
 
     return (
