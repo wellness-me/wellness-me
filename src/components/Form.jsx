@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Cookies from 'universal-cookie';
 
 import Journal from './Journal.jsx'
 import Sleep from './Sleep.jsx'
@@ -16,8 +17,14 @@ const Form = () => {
     console.log(daySlider)
     console.log(journalText)
 
+    const cookies = new Cookies();
+    const username = cookies.get("username")
+    const userID = cookies.get("userid")
+    const token = cookies.get("token")
+
     const postToAPI = async () => {
         const data = {
+            "userID": userID,
             "sleep": sleepSlider,
             "exercise": exerciseSlider,
             "journal": journalText,
@@ -26,15 +33,19 @@ const Form = () => {
 
         const r = await fetch("http://localhost:5000/v1/data/", {
             method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
             body: JSON.stringify(data),
         })
-        console.log(r.json())
+        console.log(await r.json())
     }
 
     return (
         <div>
             <br/>
-            <h3 className="greeting">Good afternoon, Eggert.</h3>
+            <h3 className="greeting">g'day {username}</h3>
             <div className="happiness-slider">
                 <h5>How was your day?</h5>
                 <Slider value={daySlider} setValue={setDaySlider} />
