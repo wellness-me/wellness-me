@@ -5,6 +5,7 @@ import Journal from './Journal.jsx'
 import Sleep from './Sleep.jsx'
 import Slider from './Slider.jsx'
 import Exercise from './Exercise.jsx';
+import { useHistory } from 'react-router-dom';
 
 const Form = () => {
 
@@ -21,6 +22,7 @@ const Form = () => {
     const username = cookies.get("username")
     const userID = cookies.get("userid")
     const token = cookies.get("token")
+    const history = useHistory()
 
     const postToAPI = async () => {
         const data = {
@@ -39,6 +41,9 @@ const Form = () => {
             },
             body: JSON.stringify(data),
         })
+        if (r.status === 401) {
+            history.push("/")
+        }
         console.log(await r.json())
     }
 

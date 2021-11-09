@@ -1,5 +1,4 @@
 import React from 'react';
-// import DoubleSlider from './DoubleSlider.jsx'
 import SleepSlider from './SleepSlider.jsx';
 
 const Sleep = (props) => {
@@ -19,5 +18,5 @@ const Sleep = (props) => {
         </div>
         );
 }
- 
+
 export default Sleep;
