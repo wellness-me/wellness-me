@@ -9,8 +9,8 @@ import Analytics from './components/Charts/Analytics';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import ProtectedRoute from './components/ProtectedRoute';
-import NavBar from './components/NavBar.jsx'
+import ProtectedRoute from './components/Utils/ProtectedRoute';
+import NavBar from './components/Utils/NavBar.jsx'
 import './App.css';
 
 const App = () => {

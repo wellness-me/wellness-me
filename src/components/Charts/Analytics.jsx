@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
-import moment from "moment";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-
+import SleepChart from './SleepChart';
+import ExerciseChart from './ExerciseChart';
 
 const Analytics = () => {
     const [data, setData] = useState([])
+    const [username, setUsername] = useState("")
     
     const getData = async () => {
         const cookies = new Cookies();
         const userid = cookies.get("userid");
         const token = cookies.get("token");
+        const username = cookies.get("username");
+        setUsername(username)
 
         const url = `http://localhost:5000/v1/data/${userid}`
         const r = await fetch(url, {
@@ -30,28 +32,9 @@ const Analytics = () => {
 
     return (
         <div>
-            <ResponsiveContainer width="100%" aspect={3}>
-                <LineChart
-                    width={500}
-                    height={300}
-                    data={data}
-                    margin={{
-                        top: 5,
-                        right: 30,
-                        left: 20,
-                        bottom: 5,
-                    }}
-                >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="createdAt" tickFormatter={timeStr => moment(timeStr).format('MMM-D-YY')} />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                {/* <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} /> */}
-                <Line type="monotone" dataKey="exercise" stroke="#82ca9d" />
-                </LineChart>
-            </ResponsiveContainer>
-
+            <h3 className="greeting">hi {username}, here's your data</h3>
+            <SleepChart data={data} />
+            <ExerciseChart data={data} />
         </div>
     )
 }
