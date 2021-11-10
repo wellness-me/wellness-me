@@ -30,7 +30,11 @@ const getData = async (req, res) => {
         res.status(httpStatus.NOT_FOUND).send({})
     }
 
-    // TODO: sort this by date
+    // sorted by date
+    dataForUser.sort((a, b) => {
+        new Date(b.date) - new Date(a.date);
+    })
+
     res.status(httpStatus.OK).send(dataForUser)
 }
 

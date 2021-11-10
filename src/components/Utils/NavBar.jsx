@@ -9,7 +9,7 @@ const NavBar = () => {
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto" style={{marginRight:"20px"}}>
                 <a class="nav-item nav-link active" href="/form">Daily Check-In</a>
-                <a class="nav-item nav-link" href="#">Analytics</a>
+                <a class="nav-item nav-link" href="/analytics">Analytics</a>
                 <a class="nav-item nav-link" href="#">Settings</a>
                 </div>
             </div>

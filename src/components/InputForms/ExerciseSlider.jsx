@@ -16,4 +16,5 @@ const ExerciseSlider = (props) => {
         />
     );
 };
+
 export default ExerciseSlider;

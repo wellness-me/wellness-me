@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Col, Row } from "react-bootstrap";
+// import { Form, Col, Row } from "react-bootstrap";
 import ExerciseSlider from "./ExerciseSlider";
 
 const Exercise = (props) => {
