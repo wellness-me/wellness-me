@@ -5,6 +5,7 @@ import LoginPage from "./components/Auth/LoginPage"
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import Analytics from './components/Charts/Analytics';
+import SettingsPage from './components/Settings/SettingsPage';
 
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
@@ -24,6 +25,7 @@ const App = () => {
                 <Route path="/register" component={Register} exact />
                 <ProtectedRoute path="/form" component={Form} exact />
                 <ProtectedRoute path="/analytics" component={Analytics} exact />
+                <ProtectedRoute path="/settings" component={SettingsPage} exact />
             </Switch>
         </main>
     </div>
