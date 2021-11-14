@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import SleepChart from './SleepChart';
 import ExerciseChart from './ExerciseChart';
+import UserCustomizableChart from './UserCustomizableChart'
 
 const Analytics = () => {
     const [data, setData] = useState([])
@@ -22,7 +23,7 @@ const Analytics = () => {
             },
         })
         const json = await r.json();
-        console.log(json)
+        //console.log(json)
         setData(json)
     }
 
@@ -33,8 +34,10 @@ const Analytics = () => {
     return (
         <div>
             <h3 className="greeting">hi {username}, here's your data</h3>
-            <SleepChart data={data} />
-            <ExerciseChart data={data} />
+            {/*<SleepChart data={data} />
+            <ExerciseChart data={data} />*/}
+            <UserCustomizableChart data={data}></UserCustomizableChart>
+
         </div>
     )
 }

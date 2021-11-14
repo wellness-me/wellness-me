@@ -20,7 +20,7 @@ const Goals = () => {
                 <div class="form-check" id="goal-2">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                     <label contentEditable="true">
-                        Another one..
+                        Anothe' one..
                     </label>
                 </div>
                 <div class="form-check" id="goal-3">

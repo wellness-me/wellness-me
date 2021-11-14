@@ -9,14 +9,14 @@ import { useHistory } from 'react-router-dom';
 
 const Form = () => {
 
-    const [ exerciseSlider, setExerciseSlider ] = useState(30);
-    const [ daySlider, setDaySlider ] = useState(50);
-    const [ sleepSlider, setSleepSlider ] = useState(7);
-    const [ journalText, setJournalText ] = useState("")
-    console.log(exerciseSlider)
-    console.log(sleepSlider)
-    console.log(daySlider)
-    console.log(journalText)
+    const [exerciseSlider, setExerciseSlider] = useState(30);
+    const [daySlider, setDaySlider] = useState(50);
+    const [sleepSlider, setSleepSlider] = useState(7);
+    const [journalText, setJournalText] = useState("")
+    //console.log(exerciseSlider)
+    //console.log(sleepSlider)
+    //console.log(daySlider)
+    //console.log(journalText)
 
     const cookies = new Cookies();
     const username = cookies.get("username")
@@ -44,19 +44,19 @@ const Form = () => {
         if (r.status === 401) {
             history.push("/")
         }
-        console.log(await r.json())
+        //console.log(await r.json())
     }
 
     return (
         <div>
-            <br/>
+            <br />
             <h3 className="greeting">g'day {username}</h3>
             <div className="happiness-slider">
                 <h5>How was your day?</h5>
                 <Slider value={daySlider} setValue={setDaySlider} />
                 <div className="face-icons">
-                    <div className="face-icon" id="sad-face">:(</div>
-                    <div className="face-icon" id="happy-face">:)</div>
+                    <div className="face-icon" id="sad-face">😓</div>
+                    <div className="face-icon" id="happy-face">😊</div>
                 </div>
             </div>
 
@@ -73,7 +73,7 @@ const Form = () => {
             </div>
 
             <div id="submit-button">
-                <button type="button" class="btn btn-primary" onClick={postToAPI}>Submit!</button>
+                <button type="button" class="btn btn-primary" onClick={() => { postToAPI(); alert("submitted succesfully!"); }}>Submit!</button>
             </div>
         </div>
     )
