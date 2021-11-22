@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Label } from 'recharts';
 import CustomizationBox from "./CustomizationBox";
 
 const allNonDataInputValues = ['_id', 'createdAt', 'userID', '__v', 'updatedAt']
@@ -9,40 +9,46 @@ class UserCustomizableChart extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectableCategories: {}
+            selectedCategories: [],
+            startTimestampIndex: 0,
+            endTimestampIndex: this.props.data.length,
         }
 
-        if (this.props.data.length > 0) {
-            alert('filtering through the data')
-            //alert("the props arte", props.data[this.props.data.length - 1]);
-            const possibleValues = Object.keys(props.data[this.props.data.length - 1]).filter((item) => {
-                return allNonDataInputValues.indexOf(item) === -1;
-            })
-            for (let i = 0; i < possibleValues.length; i++) {
-                console.log(possibleValues[i]);
-                this.state.selectableCategories[possibleValues[i]] = false;
-            }
-            this.handleCheckboxChange = this.handleCheckboxChange.bind(this)
-        }
+        this.updateSelectedCategories = this.updateSelectedCategories.bind(this)
+        this.updateTimeRange = this.updateTimeRange.bind(this)
+
     }
 
-    handleCheckboxChange(event) {
-        alert("handleChange is called")
-        const selectableCategoriesDummy = this.state.selectableCategories
-        selectableCategoriesDummy[event.target.value] = !selectableCategoriesDummy[event.target.value];
-        this.setState({ selectableCategories: selectableCategoriesDummy })
+    updateSelectedCategories(selectedCategories) {//take in a list, we trust lower component to manage 
+        this.setState({ selectedCategories: selectedCategories });
+    }
+
+    updateTimeRange(startIndex, endIndex) {
+        console.log('updatin to', startIndex, endIndex);
+        this.setState({
+            startTimestampIndex: startIndex,
+            endTimestampIndex: endIndex,
+        })
+    }
+
+    //!depracted
+    handleCheckboxChange(e) {
+        //alert("handleChange is called")
+        console.log(e.target)
+        //negate the membership of the element in the array
+        this.setState((this.state.selectedCategories.includes(e.target.value) ? { selectedCategories: this.state.selectedCategories.filter((value) => value !== e.target.value) }
+            : { selectedCategories: this.state.selectedCategories.push(e.target.value) }))
     }
 
     render() {
         return (
             <>
-                <h1>sleep is {this.state.selectableCategories.sleep ? "true" : "false"}</h1>
 
                 <ResponsiveContainer width="100%" aspect={3}>
                     <LineChart
                         width={500}
                         height={300}
-                        data={this.props.data}
+                        data={this.props.data.slice(this.state.startTimestampIndex, this.state.endTimestampIndex + 1)}
                         margin={{
                             top: 5,
                             right: 30,
@@ -51,22 +57,66 @@ class UserCustomizableChart extends React.Component {
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="createdAt" tickFormatter={timeStr => moment(timeStr).format('MMM-D-YY')} />
-                        <YAxis />
-                        <Tooltip />
+                        <XAxis range={[this.state.startTimestampIndex, this.state.endTimestampIndex]} dataKey="createdAt" tickFormatter={timeStr => moment(timeStr).format('MMM-D-YY')} />
+                        {console.log([this.state.startTimestampIndex, this.state.endTimestampIndex])}
+                        <YAxis width={80} yAxisId="left" tick={{ fontSize: 10 }}>
+                            <Label
+                                value={this.state.selectedCategories[0]}
+                                angle={-90}
+                                position='outside'
+                                fill='#FF6347'
+                                fontSize={14}
+                            />
+                        </YAxis>
+                        <YAxis width={80} yAxisId="right" orientation="right" tick={{ fontSize: 10, }}>
+                            <Label
+                                value={this.state.selectedCategories[1]}
+                                angle={-90}
+                                position='outside'
+                                fill='#808000'
+                                fontSize={14}
+                            />
+                        </YAxis>
+                        <Tooltip content={<CustomTooltip />} formatter={(value) => value} />
                         <Legend />
-                        <Line type="monotone" dataKey="sleep" stroke="#8884d8" unit=" hours" />
+                        <Line yAxisId="left" type="monotone" dataKey={this.state.selectedCategories[0]} stroke={'#FF6347'} />
+                        <Line yAxisId="right" type="monotone" dataKey={this.state.selectedCategories[1]} stroke={'#808000'} />
+
                     </LineChart>
                 </ResponsiveContainer>
-                {console.log(this.state.selectableCategories)}
                 <CustomizationBox
-                    selectableCategories={this.state.selectableCategories}
                     data={this.props.data}
-                    handleCheckboxChange={this.handleCheckboxChange}>
+                    updateSelectedCategories={this.updateSelectedCategories}
+                    updateTimeRange={this.updateTimeRange}
+                >
                 </CustomizationBox>
             </>
         )
     }
 }
 
+const CustomTooltip = ({ active, payload, label }) => {
+    //console.log('payload', payload, active);
+    if (active && payload && payload.length > 0) {
+        return (
+            <div className="custom-tooltip" style={{
+                border: '3px solid black',
+                borderRadius: '3%',
+                padding: '10px'
+            }}>
+                <p className="date">{moment(payload[0].payload.createdAt).format('MMM-D-YY')}</p>
+                {payload.map((value) => {
+                    return (
+                        <p key={value.dataKey} className="display-data-key">{value.dataKey}: {value.value}</p>
+                    )
+                })}
+                <p className="">and journaled:</p>
+                <p className="journal">{payload[0].payload.journal}</p>
+            </div>
+        );
+    }
+    else {
+        return (<p>nothing to see!</p>)
+    }
+}
 export default UserCustomizableChart;
