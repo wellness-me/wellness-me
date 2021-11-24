@@ -13,60 +13,60 @@ const LoginPage = () => {
     const history = useHistory()
 
     const handleLoginSubmit = async () => {
-        // const data = {
-        //     username: username,
-        //     password: password
-        // }
-        // const r = await fetch("http://localhost:5000/v1/users/login/", {
-        //     method: "POST",
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(data)
-        // })
+        const data = {
+            username: username,
+            password: password
+        }
+        const r = await fetch("http://localhost:5000/v1/users/login/", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
 
-        // if (r.status === 200) {
-        //     const json = await r.json()
-        //     const cookies = new Cookies();
+        if (r.status === 200) {
+            const json = await r.json()
+            const cookies = new Cookies();
 
-        //     console.log(r.cookies)
+            console.log(r.cookies)
 
-        //     cookies.set("token", json.token)
-        //     cookies.set("username", json.username)
-        //     cookies.set("userid", json._id)
+            cookies.set("token", json.token)
+            cookies.set("username", json.username)
+            cookies.set("userid", json._id)
             
-        //     setLoginFailed(false)
-        //     history.push("/form")
-        // }
-        // else {
-        //     console.log("login failed")
-        //     setLoginFailed(true)
-        // }
+            setLoginFailed(false)
+            history.push("/form")
+        }
+        else {
+            console.log("login failed")
+            setLoginFailed(true)
+        }
     }
 
     const handleRegisterSubmit = async () => {
-        // const data = {
-        //     "username": username,
-        //     "password": password,
-        // }
+        const data = {
+            "username": username,
+            "password": password,
+        }
 
-        // const r = await fetch("http://localhost:5000/v1/users/register", {
-        //     method: "POST",
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(data)
-        // })
-        // if (r.status === 201) {
-        //     const json = await r.json()
-        //     const cookies = new Cookies();
+        const r = await fetch("http://localhost:5000/v1/users/register", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        if (r.status === 201) {
+            const json = await r.json()
+            const cookies = new Cookies();
 
-        //     cookies.set("token", json.token)
-        //     cookies.set("username", json.username)
-        //     cookies.set("userid", json._id)
+            cookies.set("token", json.token)
+            cookies.set("username", json.username)
+            cookies.set("userid", json._id)
 
-        //     history.push("/form")
-        // }
+            history.push("/form")
+        }
     }
 
     const messageFailed = () => {
