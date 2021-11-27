@@ -16,6 +16,13 @@ const registerUser = async (req, res) => {
         password: encryptedPassword
     }
 
+    const findExistingUser = await Users.findOne({
+        username: req.body.username
+    })
+    if (findExistingUser !== null) {
+        res.status(httpStatus.UNAUTHORIZED).send({})
+    }
+
     const newUser = new Users(data)
 
     const user = await Users.create(newUser)
