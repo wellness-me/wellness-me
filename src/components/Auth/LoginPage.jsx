@@ -9,6 +9,7 @@ const LoginPage = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [loginFailed, setLoginFailed] = useState(false)
+    const [registerFailed, setRegisterFailed] = useState(false)
 
     const history = useHistory()
 
@@ -39,7 +40,6 @@ const LoginPage = () => {
             history.push("/form")
         }
         else {
-            console.log("login failed")
             setLoginFailed(true)
         }
     }
@@ -64,8 +64,11 @@ const LoginPage = () => {
             cookies.set("token", json.token)
             cookies.set("username", json.username)
             cookies.set("userid", json._id)
-
+            setRegisterFailed(false)
             history.push("/form")
+        }
+        else {
+            setRegisterFailed(true)
         }
     }
 
@@ -74,6 +77,13 @@ const LoginPage = () => {
             return (
                 <div>
                     <p>Login failed, please retry</p>
+                </div>
+            )
+        }
+        else if (registerFailed) {
+            return (
+                <div>
+                    <p>Username already exists, please pick a new one</p>
                 </div>
             )
         }

@@ -48,7 +48,8 @@ class UserCustomizableChart extends React.Component {
                     <LineChart
                         width={500}
                         height={300}
-                        data={this.props.data.slice(this.state.startTimestampIndex, this.state.endTimestampIndex + 1)}
+                        data={this.props.data}
+
                         margin={{
                             top: 5,
                             right: 30,
@@ -80,7 +81,6 @@ class UserCustomizableChart extends React.Component {
                         <Tooltip content={<CustomTooltip />} formatter={(value) => value} />
                         <Legend />
                         <Line yAxisId="left" type="monotone" dataKey={this.state.selectedCategories[0]} stroke={'#FF6347'} />
-                        <Line yAxisId="right" type="monotone" dataKey={this.state.selectedCategories[1]} stroke={'#808000'} />
 
                     </LineChart>
                 </ResponsiveContainer>
@@ -96,7 +96,6 @@ class UserCustomizableChart extends React.Component {
 }
 
 const CustomTooltip = ({ active, payload, label }) => {
-    //console.log('payload', payload, active);
     if (active && payload && payload.length > 0) {
         return (
             <div className="custom-tooltip" style={{
@@ -111,7 +110,7 @@ const CustomTooltip = ({ active, payload, label }) => {
                     )
                 })}
                 <p className="">and journaled:</p>
-                <p className="journal">{payload[0].payload.journal}</p>
+                <p className="journal">{payload[0].payload.journal !== "" ? payload[0].payload.journal : "No journal for today"}</p>
             </div>
         );
     }
