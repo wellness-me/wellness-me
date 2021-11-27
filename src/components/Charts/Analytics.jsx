@@ -23,7 +23,6 @@ const Analytics = () => {
             },
         })
         const json = await r.json();
-        //console.log(json)
         setData(json)
     }
 
@@ -34,10 +33,7 @@ const Analytics = () => {
     return (
         <div>
             <h3 className="greeting">hi {username}, here's your data</h3>
-            {/*<SleepChart data={data} />
-            <ExerciseChart data={data} />*/}
             <UserCustomizableChart data={data}></UserCustomizableChart>
-
         </div>
     )
 }
