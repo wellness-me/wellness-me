@@ -4,7 +4,6 @@ import Logout from './Logout';
 import DeleteUser from './DeleteUser';
 
 const SettingsPage = () => {
-
     return (
         <div className = "setting-columns" style= {{ display: "flex" }}>
             <h1 className="greeting">Settings</h1>
@@ -17,12 +16,11 @@ const SettingsPage = () => {
                 <div style = {{ display: "flex"}}>
                     <Button onClick={DeleteUser} style={{backgroundColor: 'rgb(209, 26, 42)', color: 'white', justifyContent: "left", fontSize: "90%"}}>DELETE ACCOUNT</Button>
                     <div style = {{marginLeft: "10%", fontSize: "110%", verticalAlign: "middle", marginTop: "5px"}}>
-                        <p>Are you sure you want to delete all your data stored at wellness.me?</p>
+                        <p>Are you sure you want to delete all your data stored in wellness.me?</p>
                     </div>
                 </div>
             </div>
         </div>
-        
     )
 }
 

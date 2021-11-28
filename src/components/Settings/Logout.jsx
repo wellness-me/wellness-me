@@ -1,7 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'semantic-ui-react'
-
 import Cookies from 'universal-cookie';
 
 
@@ -19,7 +18,6 @@ const Logout = () => {
     return (
         <div>
             <Button onClick={handleClick} >Logout</Button>
-            
         </div>
     )
 }
