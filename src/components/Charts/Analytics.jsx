@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
-import SleepChart from './SleepChart';
-import ExerciseChart from './ExerciseChart';
 import UserCustomizableChart from './UserCustomizableChart'
 
 const Analytics = () => {
@@ -24,6 +22,7 @@ const Analytics = () => {
             },
         })
         const json = await r.json();
+        console.log(json)
         if (data !== json) {
             setData(json)
         }

@@ -1,41 +1,14 @@
 import React, { useState } from "react";
-import { Button } from "semantic-ui-react";
+import { Dropdown } from "semantic-ui-react";
 
 const UNSELECTABLE_PROPS = ['__v', '_id', 'createdAt', 'updatedAt', 'userID', "journal"]
 
-const CustomizationBox = (props) => {/* can be converted back into a functional component*/
-
-
-    const [selectedCategories, setSelectedCategories] = useState([]);
+const CustomizationBox = (props) => {
     const [startDateIndex, setStartDateIndex] = useState(0)
-    const [endDateIndex, setEndDateIndex] = useState(props.data.length)
 
-    const handleSelectBoxChangeFrom = (e) => {
-        props.updateTimeRange(parseInt(e.target.value), endDateIndex)
-        setStartDateIndex(parseInt(e.target.value))
+    const handleChangeDropdown = (e, {value}) => {
+        props.updateSelectedCategories([value])
     }
-    const handleSelectBoxChangeTo = (e) => {
-        props.updateTimeRange(startDateIndex, parseInt(e.target.value))
-        setEndDateIndex(parseInt(e.target.value))
-    }
-
-
-    const internallyHandleCheckboxChange = (e) => {
-        let newSelectedCategories = [];
-        if (selectedCategories.includes(e.target.value)) {
-            newSelectedCategories = selectedCategories.filter(value => value !== e.target.value)
-        } else if (selectedCategories.length == 2) {
-            alert('must de-select a data field before adding a new one')
-            e.target.checked = !e.target.checked
-            return;
-        } else {
-            newSelectedCategories = [...selectedCategories, e.target.value];
-        }
-
-        props.updateSelectedCategories(newSelectedCategories)
-        setSelectedCategories(newSelectedCategories)
-    }
-
 
     if (props.data.length < 1) {
         return (<h5>Please input some data before you can select it</h5>)
@@ -56,22 +29,21 @@ const CustomizationBox = (props) => {/* can be converted back into a functional 
             }).filter((value, index) => { return index > startDateIndex })
         }
 
+        const options = []
+
+        selectableKeys.map((value, idx) => {
+            options.push({
+                key: idx + 1,
+                text: value,
+                value: value
+            })
+        })
 
         return (
             <div className="customization-box-wrapper">
                 <div className="select-categories-div">
                     <h4> Select what you would like the chart to display</h4>
-                    {
-                        selectableKeys.map((value) => {
-                            return (
-                                <div className="select-input-container">
-                                    <Button primary onClick={internallyHandleCheckboxChange} key={value} value={value}>{value}</Button>
-                                    {/* <input onChange={internallyHandleCheckboxChange} class="form-check-input" type="checkbox" key={value} value={value} className="flexCheckDefault" />
-                                    <label>{value}</label> */}
-                                </div>
-                            )
-                        })
-                    }
+                    <Dropdown clearable options={options} selection onChange={handleChangeDropdown}/> 
                 </div>
             </div>
         )
