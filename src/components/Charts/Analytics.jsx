@@ -5,6 +5,7 @@ import ExerciseChart from './ExerciseChart';
 import 'bootstrap/dist/css/bootstrap.css';
 import DateRangeSelector from './DateRangeSelector';
 import JournalDisplay from './JournalDisplay';
+import HappinessChart from './HappinessChart';
 
 const Analytics = () => {
     const [data, setData] = useState([])
@@ -73,10 +74,12 @@ const Analytics = () => {
         getStreak()
     }, [data])
 
+    console.log(data)
+
     return (
         <div>
             <h3 className="greeting">Hello {username}, here's your progress!</h3>
-            
+
             {printStreak()}
             <br/>
             <div className="graphs">
@@ -96,11 +99,22 @@ const Analytics = () => {
                     <DateRangeSelector/>
                     <p>Your average time during exercise over this period was x minutes.</p>
                 </div>
+
+            </div>
+            <div classname="graphs">
+                <div className="happiness-graph">
+                    <h5>Happiness</h5>
+                    <br/>
+                    <HappinessChart data={data}></HappinessChart>
+                    <br/>
+                    <DateRangeSelector/>
+                    <p>Your average happiness over this period was 70/100.</p>
+                </div>
             </div>
             <br/><hr/><br/>
             <h5>Journal Entries</h5>
             <br/>
-            <JournalDisplay/>
+            <JournalDisplay data={data} />
             <br/><br/><br/>
         </div>
     )

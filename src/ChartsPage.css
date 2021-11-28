@@ -7,6 +7,11 @@
 	margin: auto;
 }
 
+.happiness-graph {
+	width: 50%;
+	margin: auto;
+}
+
 /* Large devices (laptops/desktops, 992px and up) */
 /* @media only screen and (min-width: 992px) {
 	.graphs {

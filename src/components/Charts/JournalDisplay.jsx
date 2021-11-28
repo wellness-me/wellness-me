@@ -1,45 +1,25 @@
-import Accordion from 'react-bootstrap/Accordion'
+import Accordion from 'react-bootstrap/Accordion';
+import moment from "moment";
 
 const JournalDisplay = (props) => {
+
+    const journalDropdown = () => (
+        props.data.map((el, idx) => (
+            <Accordion.Item key={idx} eventKey={idx}>
+                <Accordion.Header>{moment(el.createdAt).format('MMM D, YY')}</Accordion.Header>
+
+                <Accordion.Body>
+                    {el.journal === "" ? "No journal for today" : el.journal}
+                </Accordion.Body>
+            </Accordion.Item>
+        ))
+    )
+
     return (
         <Accordion defaultActiveKey="0">
-            <Accordion.Item eventKey="0">
-                <Accordion.Header>MMM DD, YYYY</Accordion.Header>
-                <Accordion.Body>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                est laborum.
-                </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="1">
-                <Accordion.Header>MMM DD, YYYY</Accordion.Header>
-                <Accordion.Body>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                est laborum.
-                </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="2">
-                <Accordion.Header>MMM DD, YYYY</Accordion.Header>
-                <Accordion.Body>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                est laborum.
-                </Accordion.Body>
-            </Accordion.Item>
+            {journalDropdown()}
         </Accordion>
     )
 }
+
 export default JournalDisplay;

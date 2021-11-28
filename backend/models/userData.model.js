@@ -18,6 +18,10 @@ const userDataSchema = new Schema({
         type: Number,
         required: true
     },
+    happiness: {
+        type: Number,
+        required: true
+    },
     journal: {
         type: String,
         required: false,
