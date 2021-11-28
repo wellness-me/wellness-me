@@ -1,4 +1,6 @@
 import './App.css';
+import './LoginPage.css';
+import './SettingsPage.css';
 import 'semantic-ui-css/semantic.min.css'
 import Form from './components/InputForms/Form';
 import LoginPage from "./components/Auth/LoginPage"

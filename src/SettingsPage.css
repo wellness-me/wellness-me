@@ -1,0 +1,76 @@
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+	.App {
+		max-width: 90%;
+	}
+	.setting-columns {
+        flex-direction: column;
+    }
+    .setting-box {
+        margin-top: 30px;
+    }
+    .delete-button {
+        background-color: rgb(209, 26, 42);
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+	.App {
+		max-width: 90%;
+	}
+	.setting-columns {
+        flex-direction: column;
+    }
+    .setting-box {
+        margin-top: 30px;
+    }
+    .delete-button {
+        background-color: rgb(209, 26, 42);
+    }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+	.App {
+		max-width: 75%;
+	}
+	.setting-columns {
+        flex-direction: column;
+    }
+    .setting-box {
+        margin-top: 30px;
+    }
+    .delete-button {
+        background-color: rgb(209, 26, 42);
+    }
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+	.App {
+		max-width: 75%;
+	}
+	.setting-columns {
+        flex-direction: column;
+    }
+    .setting-box {
+        margin-top: 30px;
+    }
+    .delete-button {
+        background-color: rgb(209, 26, 42);
+    }
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+	.App {
+		max-width: 900px;
+	}
+	.setting-columns {
+        flex-direction: column;
+    }
+    .setting-box {
+        margin-top: 30px;
+    }
+    .delete-button {
+        background-color: rgb(209, 26, 42);
+    }
+}
