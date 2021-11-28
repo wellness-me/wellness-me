@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import SleepChart from './SleepChart';
 import ExerciseChart from './ExerciseChart';
-import UserCustomizableChart from './UserCustomizableChart'
+import 'bootstrap/dist/css/bootstrap.css';
+import DateRangeSelector from './DateRangeSelector';
+import JournalDisplay from './JournalDisplay';
 
 const Analytics = () => {
     const [data, setData] = useState([])
@@ -55,7 +57,8 @@ const Analytics = () => {
     const printStreak = () => {
         if (streak !== 0) {
             return (
-                <p>Great Job! You're on a {streak} day streak</p>
+                <p>Great job! You're on a <b>{streak}-day streak</b>.</p>
+
             )
         }
     }
@@ -72,9 +75,33 @@ const Analytics = () => {
 
     return (
         <div>
-            <h3 className="greeting">hi {username}, here's your data</h3>
+            <h3 className="greeting">Hello {username}, here's your progress!</h3>
+            
             {printStreak()}
-            <UserCustomizableChart data={data}></UserCustomizableChart>
+            <br/>
+            <div className="graphs">
+                <div className="sleep graph">
+                    <h5>Sleep</h5>
+                    <br/>
+                    <SleepChart data={data}></SleepChart>
+                    <br/>
+                    <DateRangeSelector/>
+                    <p>Your average sleep time over this period was x hours.</p>
+                </div>
+                <div className="exercise graph">
+                    <h5>Exercise</h5>
+                    <br/>
+                    <ExerciseChart data={data}></ExerciseChart>
+                    <br/>
+                    <DateRangeSelector/>
+                    <p>Your average time during exercise over this period was x minutes.</p>
+                </div>
+            </div>
+            <br/><hr/><br/>
+            <h5>Journal Entries</h5>
+            <br/>
+            <JournalDisplay/>
+            <br/><br/><br/>
         </div>
     )
 }

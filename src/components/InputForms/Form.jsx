@@ -50,7 +50,7 @@ const Form = () => {
     return (
         <div>
             <br />
-            <h3 className="greeting">g'day {username}</h3>
+            <h3 className="greeting">Good day, {username}.</h3>
             <div className="happiness-slider">
                 <h5>How was your day?</h5>
                 <Slider value={daySlider} setValue={setDaySlider} />
