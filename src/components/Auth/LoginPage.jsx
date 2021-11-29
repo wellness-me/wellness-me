@@ -18,7 +18,7 @@ const LoginPage = () => {
             username: username,
             password: password
         }
-        const r = await fetch("http://localhost:5000/v1/users/login/", {
+        const r = await fetch("/v1/users/login/", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ const LoginPage = () => {
             "password": password,
         }
 
-        const r = await fetch("http://localhost:5000/v1/users/register", {
+        const r = await fetch("/v1/users/register", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
