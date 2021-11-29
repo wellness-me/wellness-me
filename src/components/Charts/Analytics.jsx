@@ -64,6 +64,18 @@ const Analytics = () => {
         }
     }
 
+    const sum = (arr, key) => {
+        let sum = 0;
+        let i;
+        for (i = 0; i < arr.length; i++) {
+            const el = arr[i]
+            sum += el[key]
+        }
+
+        const avg = sum / arr.length;
+        return avg.toFixed(1)
+    }
+
     useEffect(() => {
         // run fetch API once on load
         getData()
@@ -89,7 +101,7 @@ const Analytics = () => {
                     <SleepChart data={data}></SleepChart>
                     <br/>
                     <DateRangeSelector/>
-                    <p>Your average sleep time over this period was x hours.</p>
+                    <p>Your average sleep time over this period was {sum(data, "sleep")} hours.</p>
                 </div>
                 <div className="exercise graph">
                     <h5>Exercise</h5>
@@ -97,20 +109,19 @@ const Analytics = () => {
                     <ExerciseChart data={data}></ExerciseChart>
                     <br/>
                     <DateRangeSelector/>
-                    <p>Your average time during exercise over this period was x minutes.</p>
+                    <p>Your average time during exercise over this period was {sum(data, "exercise")} minutes.</p>
                 </div>
-
             </div>
-            <div classname="graphs">
+            {/* <div classname="graphs">
                 <div className="happiness-graph">
                     <h5>Happiness</h5>
                     <br/>
                     <HappinessChart data={data}></HappinessChart>
                     <br/>
                     <DateRangeSelector/>
-                    <p>Your average happiness over this period was 70/100.</p>
+                    <p>Your average happiness over this period was {sum(data, "happiness")}/100.</p>
                 </div>
-            </div>
+            </div> */}
             <br/><hr/><br/>
             <h5>Journal Entries</h5>
             <br/>
