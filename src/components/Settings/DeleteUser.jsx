@@ -16,7 +16,7 @@ const DeleteUser = () => {
         const token = cookies.get("token");
 
 
-        const r = await fetch(`http://localhost:5000/v1/data/${userID}`, {
+        const r = await fetch(`/v1/data/${userID}`, {
             method: "DELETE",
             headers: {
                 "Authorization": "Bearer " + token

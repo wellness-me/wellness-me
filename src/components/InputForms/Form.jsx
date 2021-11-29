@@ -33,7 +33,7 @@ const Form = () => {
             "happiness": daySlider,
         }
 
-        const r = await fetch("http://localhost:5000/v1/data/", {
+        const r = await fetch("/v1/data/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
