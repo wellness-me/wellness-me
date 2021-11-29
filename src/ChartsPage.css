@@ -1,0 +1,28 @@
+.graphs {
+	display: flex;
+}
+
+.graph {
+	width: 100%;
+	margin: auto;
+}
+
+.happiness-graph {
+	width: 50%;
+	margin: auto;
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+/* @media only screen and (min-width: 992px) {
+	.graphs {
+		display: block;
+	}
+} */
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+/* @media only screen and (min-width: 1200px) {
+	.graphs {
+		display: flex;
+		justify-content: center;
+	}
+} */

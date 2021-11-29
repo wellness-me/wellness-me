@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const SleepChart = (props) => {
+const HappinessChart = (props) => {
     return (
         <ResponsiveContainer width="100%" aspect={1.25}>
             <LineChart
@@ -20,10 +20,10 @@ const SleepChart = (props) => {
             <XAxis dataKey="createdAt" tickFormatter={timeStr => moment(timeStr).format('MMM D, YYYY')} />
             <YAxis />
             <Tooltip />
-            <Line type="monotone" dataKey="sleep" stroke="#8884d8" unit=" hours"/>
+            <Line type="monotone" dataKey="happiness" stroke="#82ca9d" unit=""/>
             </LineChart>
         </ResponsiveContainer>
     )
 }
 
-export default SleepChart;
+export default HappinessChart;

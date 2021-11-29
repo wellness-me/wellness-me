@@ -44,3 +44,8 @@
 #happy-face {
 	text-align: end;
 }
+
+.btn-custom {
+	background-color: #818196 !important;
+	border: none !important;
+}

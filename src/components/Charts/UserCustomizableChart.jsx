@@ -51,10 +51,10 @@ class UserCustomizableChart extends React.Component {
                         data={this.props.data}
 
                         margin={{
-                            top: 5,
-                            right: 30,
-                            left: 20,
-                            bottom: 5,
+                            top: 0,
+                            right: 0,
+                            left: 0,
+                            bottom: 0,
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
@@ -99,18 +99,18 @@ const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length > 0) {
         return (
             <div className="custom-tooltip" style={{
-                border: '3px solid black',
+                border: '1px solid gray',
                 borderRadius: '3%',
-                padding: '10px'
+                padding: '12px',
+                backgroundColor: "solid white",
             }}>
-                <p className="date">{moment(payload[0].payload.createdAt).format('MMM-D-YY')}</p>
+                <p className="date">{moment(payload[0].payload.createdAt).format('MMM D, YYYY')}</p>
                 {payload.map((value) => {
                     return (
                         <p key={value.dataKey} className="display-data-key">{value.dataKey}: {value.value}</p>
                     )
                 })}
-                <p className="">and journaled:</p>
-                <p className="journal">{payload[0].payload.journal !== "" ? payload[0].payload.journal : "No journal for today"}</p>
+                <p className="journal">journaled: {payload[0].payload.journal !== "" ? payload[0].payload.journal : "No journal for today"}</p>
             </div>
         );
     }
