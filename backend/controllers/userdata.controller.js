@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const { UserData } = require("../models/userData.model");
 const logger = require("../utils/logger")
+const fs = require('fs')
 
 // create a new UserData object storing data
 // from the form for this user
@@ -54,8 +55,21 @@ const deleteData = async (req, res) => {
     res.status(httpStatus.OK).send(deletedData)
 }
 
+const getJsonFile = async (req, res) => {
+    logger.info("GET /v1/data/json/:userID")
+    const dataForUser = await UserData.find({
+        "userID": req.params.userID,
+    })
+    fs.writeFileSync("data.json", JSON.stringify(dataForUser))
+
+    res
+        .status(httpStatus.OK)
+        .download("data.json")
+}
+
 module.exports = {
     createData,
     getData,
-    deleteData
+    deleteData,
+    getJsonFile
 }

@@ -4,6 +4,7 @@ import Logout from './Logout';
 import Form from 'react-bootstrap/Form';
 import Cookies from 'universal-cookie';
 import { useHistory } from 'react-router';
+const download = require("downloadjs");
 
 const SettingsPage = () => {
     const [newUsername, setNewUsername] = useState("")
@@ -84,6 +85,19 @@ const SettingsPage = () => {
         }
     }
 
+    const downloadJsonFile = async () => {
+        const token = cookies.get("token")
+        const userid = cookies.get("userid")
+        const r = await fetch(`/v1/data/json/${userid}`, {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        })
+        const blob = await r.blob()
+        download(blob, "data.json");
+    }
+
     return (
         <div>
             <br/>
@@ -93,14 +107,6 @@ const SettingsPage = () => {
                     <Form>
                         <h4>Profile</h4>
                         <hr/>
-                        
-                        {/* <Form.Group className="mb-3" controlId="formName">
-                            <Form.Label><b>Name</b></Form.Label>
-                            <Form.Control type="nickname" placeholder="Enter nickname" />
-                            <Form.Text className="text-muted">
-                            This is how we address you in our application.
-                            </Form.Text>
-                        </Form.Group> */}
 
                         <Form.Group className="mb-3" controlId="formName">
                             <Form.Label>Username</Form.Label>
@@ -110,17 +116,8 @@ const SettingsPage = () => {
                             </Form.Text>
                         </Form.Group>
 
-                        {/* <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" />
-                            <Form.Text className="text-muted">
-                            We'll never share your email with anyone else.
-                            </Form.Text>
-                        </Form.Group> */}
-
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Reset login credentials</Form.Label>
-                            {/* <Form.Control type="oldPassword" placeholder="Old password" style={{marginBottom: "5px"}}/> */}
                             <Form.Control type="newPassword" placeholder="New password" onChange={(e) => setNewPassword(e.target.value)} />
                         </Form.Group>
                         <br/>
@@ -137,8 +134,7 @@ const SettingsPage = () => {
                     <hr/><br/>
                     <p>Export all your data for your own analysis.</p>
                     <div>
-                        <button class="ui secondary basic button">Export as .json</button>
-                        <button class="ui secondary basic button">Export as .pdf</button>
+                        <button class="ui secondary basic button" onClick={downloadJsonFile}>Export as .json</button>
                     </div>
                     
                     <br/>
