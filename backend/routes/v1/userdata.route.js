@@ -14,4 +14,8 @@ router
     .get(userDataController.getData)
     .delete(userDataController.deleteData)
 
+router
+    .route("/json/:userID")
+    .get(userDataController.getJsonFile)
+
 module.exports = router
