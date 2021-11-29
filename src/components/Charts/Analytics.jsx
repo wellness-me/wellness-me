@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import DateRangeSelector from './DateRangeSelector';
 import JournalDisplay from './JournalDisplay';
 import HappinessChart from './HappinessChart';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 const Analytics = () => {
     const [data, setData] = useState([])
@@ -89,10 +91,24 @@ const Analytics = () => {
 
     return (
         <div>
-            <h3 className="greeting">Hello {username}, here's your progress!</h3>
-
-            {printStreak()}
             <br/>
+            <h3 className="greeting">Hello {username}, here's your progress!</h3>
+            <hr/><br/>
+            <div classname="graphs" style={{display: "flex", margin: "auto"}}>
+                <div className="happiness-graph" style={{flex: 1}}>
+                    <h5>Happiness</h5>
+                    <br/>
+                    <HappinessChart data={data}></HappinessChart>
+                    <br/>
+                    <DateRangeSelector/>
+                    <p>Your average happiness over this period was {sum(data, "happiness")}/100.</p>
+                </div>
+                <div style={{flex: 1, marginLeft: "65px"}}>
+                {printStreak()}
+                <Calendar/>
+                </div>
+            </div>
+            <br/><hr/><br/>
             <div className="graphs">
                 <div className="sleep graph">
                     <h5>Sleep</h5>
@@ -109,16 +125,6 @@ const Analytics = () => {
                     <br/>
                     <DateRangeSelector/>
                     <p>Your average time during exercise over this period was {sum(data, "exercise")} minutes.</p>
-                </div>
-            </div>
-            <div classname="graphs">
-                <div className="happiness-graph">
-                    <h5>Happiness</h5>
-                    <br/>
-                    <HappinessChart data={data}></HappinessChart>
-                    <br/>
-                    <DateRangeSelector/>
-                    <p>Your average happiness over this period was {sum(data, "happiness")}/100.</p>
                 </div>
             </div>
             <br/><hr/><br/>

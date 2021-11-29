@@ -6,6 +6,41 @@ const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
 
+const updateUser = async (req, res) => {
+    logger.info("PATCH /v1/users")
+
+    let data = {};
+
+    if (req.body.hasOwnProperty("password")) {
+        // update password
+        const salt = await bcrypt.genSalt(10);
+        const encryptedPassword = await bcrypt.hash(req.body.password, salt);
+        data.password = encryptedPassword;
+    }
+    if (req.body.hasOwnProperty("newusername")) {
+        // update username
+        data.username = req.body.newusername
+    }
+
+    const updatedUser = await Users.findOneAndUpdate({"username": req.body.username}, data)
+
+    res
+        .status(httpStatus.OK)
+        .send(updatedUser)
+}
+
+const deleteUser = async (req, res) => {
+    logger.info("DELETE /v1/users")
+
+    const deletedUser = await Users.findOneAndDelete({
+        "userID": req.params.userID,
+    })
+
+    res
+        .status(httpStatus.OK)
+        .send(deletedUser)
+}
+
 const registerUser = async (req, res) => {
     logger.info("POST /v1/users/register")
     const salt = await bcrypt.genSalt(10);
@@ -78,6 +113,8 @@ const loginUser = async (req, res) => {
 }
 
 module.exports = {
+    updateUser,
+    deleteUser,
     registerUser,
     loginUser
 }
