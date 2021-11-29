@@ -69,7 +69,8 @@ const Analytics = () => {
         let i;
         for (i = 0; i < arr.length; i++) {
             const el = arr[i]
-            sum += el[key]
+            // if attribute doesn't exist then set to 0
+            sum += el.hasOwnProperty(key) ? el[key] : 0
         }
 
         const avg = sum / arr.length;
@@ -85,8 +86,6 @@ const Analytics = () => {
         // only recalculate the streak when data changes
         getStreak()
     }, [data])
-
-    console.log(data)
 
     return (
         <div>
@@ -112,7 +111,7 @@ const Analytics = () => {
                     <p>Your average time during exercise over this period was {sum(data, "exercise")} minutes.</p>
                 </div>
             </div>
-            {/* <div classname="graphs">
+            <div classname="graphs">
                 <div className="happiness-graph">
                     <h5>Happiness</h5>
                     <br/>
@@ -121,7 +120,7 @@ const Analytics = () => {
                     <DateRangeSelector/>
                     <p>Your average happiness over this period was {sum(data, "happiness")}/100.</p>
                 </div>
-            </div> */}
+            </div>
             <br/><hr/><br/>
             <h5>Journal Entries</h5>
             <br/>
