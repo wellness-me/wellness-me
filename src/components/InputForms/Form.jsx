@@ -13,10 +13,6 @@ const Form = () => {
     const [daySlider, setDaySlider] = useState(50);
     const [sleepSlider, setSleepSlider] = useState(7);
     const [journalText, setJournalText] = useState("")
-    //console.log(exerciseSlider)
-    //console.log(sleepSlider)
-    //console.log(daySlider)
-    //console.log(journalText)
 
     const cookies = new Cookies();
     const username = cookies.get("username")
@@ -33,7 +29,7 @@ const Form = () => {
             "happiness": daySlider,
         }
 
-        const r = await fetch("http://localhost:5000/v1/data/", {
+        const r = await fetch("/v1/data/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

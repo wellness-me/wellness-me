@@ -21,7 +21,7 @@ const Analytics = () => {
         const username = cookies.get("username");
         setUsername(username)
 
-        const url = `http://localhost:5000/v1/data/${userid}`
+        const url = `/v1/data/${userid}`
         const r = await fetch(url, {
             method: "GET",
             headers: {
