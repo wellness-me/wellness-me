@@ -16,7 +16,7 @@ class NavBar extends React.Component {
             <Nav className="me-auto">
               {}
             </Nav>
-            <Nav>
+            <Nav className="nav-button">
               <Nav.Link href="/form">Daily Check-In</Nav.Link>
               <Nav.Link href="/analytics">Analytics</Nav.Link>
               <Nav.Link href="/settings">Settings</Nav.Link>

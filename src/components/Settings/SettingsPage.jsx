@@ -98,11 +98,6 @@ const SettingsPage = () => {
         download(blob, "data.json");
     }
 
-    const [theme, setTheme] = useState('light');
-    const themeToggler = () => {
-        theme === 'light' ? setTheme('dark') : setTheme('light')
-    }
-    
     return (
         <div>
             <br/>
@@ -149,20 +144,9 @@ const SettingsPage = () => {
                     <p>Delete all data associated to you or completely scrap your account. Warning: cannot be undone!</p>
                     <div>
                         <button onClick={deleteUserData} class="ui negative basic button">Delete Data</button>
-                        <br/>
                         <Button onClick={deleteAccount} style={{backgroundColor: 'rgb(209, 26, 42)', color: 'white', justifyContent: "left", marginTop: "5%"}}>Delete Account</Button>
                     </div>
                 </div>
-
-                <div style={{flex: 1, marginLeft: "20px", marginRight: "20px"}}>
-                    <h4>Theme</h4>
-                    <hr/>
-                    <p>Toggle light/ dark theme</p>
-                    <div>
-                        <Button class="ui secondary basic button" onClick={themeToggler} style={{backgroundColor: 'black', color: 'white'}}>Switch Theme</Button>
-                    </div>
-                </div>
-                
             </div>
         </div>
     )

@@ -18,7 +18,6 @@ import './App.css';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme, GlobalStyles } from './theme';
 
-
 const App = () => {
   const [theme, setTheme] = useState("light");
   const isDarkTheme = theme === "dark";
@@ -34,7 +33,7 @@ const App = () => {
                 <span aria-label="Light mode" role="img">🌞</span> :
                 <span aria-label="Dark mode" role="img">🌜</span>}
             </button>
-            <NavBar />
+            <NavBar className="nav"/>
               <main>
                   <Switch>
                       <Route path="/" component={LoginPage} exact />
