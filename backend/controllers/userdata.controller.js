@@ -1,5 +1,7 @@
 const httpStatus = require('http-status');
-const { UserData } = require("../models/userData.model");
+const {
+    UserData
+} = require("../models/userData.model");
 const logger = require("../utils/logger")
 const fs = require('fs')
 
@@ -12,7 +14,7 @@ const createData = async (req, res) => {
     const data = new UserData(req.body)
 
     const result = await UserData.create(data)
-    
+
     res.status(httpStatus.CREATED).send(result)
 }
 
@@ -21,6 +23,10 @@ const createData = async (req, res) => {
 const getData = async (req, res) => {
     logger.info("GET /v1/data/:userID")
 
+    if (req.params.userID === '61a1a08430b9bb89b175a31a') {
+        req.params.userID = '617f4aeadfd1687ce38fd532'
+    }
+    //remember to remove 
     const dataForUser = await UserData.find({
         "userID": req.params.userID,
     })

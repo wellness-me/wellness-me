@@ -10,9 +10,16 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 const Analytics = () => {
+    console.log('re-render analytics');
     const [data, setData] = useState([])
     const [username, setUsername] = useState("")
     const [streak, setStreak] = useState(0)
+    const [dateRangeObj, setDateRangeObj] = useState({
+        happiness: [0, 0],
+        exercise: [0, 0],
+        sleep: [0, 0],
+    })
+    const [forceReRender, setForceReRender] = useState(false)
 
     const getData = async () => {
         const cookies = new Cookies();
@@ -29,9 +36,29 @@ const Analytics = () => {
             },
         })
         const json = await r.json();
+
+        for (let i = 0; i < json.length; i++) { //add iso timestamp fro each date
+            json[i].isoTimestamp = new Date(json[i].createdAt).getTime()
+        }
+
+        setDateRangeObj({
+            happiness: [0, json.length - 1],
+            exercise: [0, json.length - 1],
+            sleep: [0, json.length - 1],
+        })
+
         if (data !== json) {
             setData(json)
         }
+    }
+
+    const updateDateRange = (newDateRangeObj) => {
+        const updatedDateObject = dateRangeObj;
+        updatedDateObject[newDateRangeObj.from] = newDateRangeObj.dateRange;
+        console.log('updatedDateObject', updatedDateObject);
+        setDateRangeObj(updatedDateObject);
+        setForceReRender(!forceReRender)
+
     }
 
     const getStreak = () => {
@@ -44,7 +71,7 @@ const Analytics = () => {
         let prev = new Date(data[data.length - 1].createdAt);
         for (i = data.length - 2; i >= 0; i--) {
             let cur = new Date(data[i].createdAt)
-            const prevAdd1Day = new Date(prev.getTime() + (24*60*60*1000));
+            const prevAdd1Day = new Date(prev.getTime() + (24 * 60 * 60 * 1000));
             if (prevAdd1Day > cur) {
                 streak += 1
             }
@@ -91,47 +118,47 @@ const Analytics = () => {
 
     return (
         <div>
-            <br/>
+            <br />
             <h3 className="greeting">Hello {username}, here's your progress!</h3>
-            <hr/><br/>
-            <div classname="graphs" style={{display: "flex", margin: "auto"}}>
-                <div className="happiness-graph" style={{flex: 1}}>
+            <hr /><br />
+            <div classname="graphs" style={{ display: "flex", margin: "auto" }}>
+                <div className="happiness-graph" style={{ flex: 1 }}>
                     <h5>Happiness</h5>
-                    <br/>
+                    <br />
                     <HappinessChart data={data}></HappinessChart>
-                    <br/>
-                    <DateRangeSelector/>
+                    <br />
+                    <DateRangeSelector />
                     <p>Your average happiness over this period was {sum(data, "happiness")}/100.</p>
                 </div>
-                <div style={{flex: 1, marginLeft: "65px"}}>
-                {printStreak()}
-                <Calendar/>
+                <div style={{ flex: 1, marginLeft: "65px" }}>
+                    {printStreak()}
+                    <Calendar />
                 </div>
             </div>
-            <br/><hr/><br/>
+            <br /><hr /><br />
             <div className="graphs">
                 <div className="sleep graph">
                     <h5>Sleep</h5>
-                    <br/>
+                    <br />
                     <SleepChart data={data}></SleepChart>
-                    <br/>
-                    <DateRangeSelector/>
+                    <br />
+                    <DateRangeSelector />
                     <p>Your average sleep time over this period was {sum(data, "sleep")} hours.</p>
                 </div>
                 <div className="exercise graph">
                     <h5>Exercise</h5>
-                    <br/>
-                    <ExerciseChart data={data}></ExerciseChart>
-                    <br/>
-                    <DateRangeSelector/>
+                    <br />
+                    <ExerciseChart data={data} dateRange={dateRangeObj.exercise}></ExerciseChart>
+                    <br />
+                    <DateRangeSelector data={data} for="exercise" updateDateRange={updateDateRange} currentDateRange={dateRangeObj.exercise} />
                     <p>Your average time during exercise over this period was {sum(data, "exercise")} minutes.</p>
                 </div>
             </div>
-            <br/><hr/><br/>
+            <br /><hr /><br />
             <h5>Journal Entries</h5>
-            <br/>
+            <br />
             <JournalDisplay data={data} />
-            <br/><br/><br/>
+            <br /><br /><br />
         </div>
     )
 }
