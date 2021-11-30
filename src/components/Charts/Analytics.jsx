@@ -93,10 +93,11 @@ const Analytics = () => {
         }
     }
 
-    const sum = (arr, key) => {
+    const sum = (arr, key, range) => {
         let sum = 0;
         let i;
-        for (i = 0; i < arr.length; i++) {
+        console.log(arr, key, range);
+        for (i = range[0]; i < Math.min(range[1] + 1, arr.length); i++) {
             const el = arr[i]
             // if attribute doesn't exist then set to 0
             sum += el.hasOwnProperty(key) ? el[key] : 0
@@ -128,7 +129,7 @@ const Analytics = () => {
                     <HappinessChart data={data}></HappinessChart>
                     <br />
                     <DateRangeSelector />
-                    <p>Your average happiness over this period was {sum(data, "happiness")}/100.</p>
+                    <p>Your average happiness over this period was {sum(data, "happiness", dateRangeObj.happiness)}/100.</p>
                 </div>
                 <div style={{ flex: 1, marginLeft: "65px" }}>
                     {printStreak()}
@@ -143,7 +144,7 @@ const Analytics = () => {
                     <SleepChart data={data}></SleepChart>
                     <br />
                     <DateRangeSelector />
-                    <p>Your average sleep time over this period was {sum(data, "sleep")} hours.</p>
+                    <p>Your average sleep time over this period was {sum(data, "sleep", dateRangeObj.happiness)} hours.</p>
                 </div>
                 <div className="exercise graph">
                     <h5>Exercise</h5>
@@ -151,7 +152,7 @@ const Analytics = () => {
                     <ExerciseChart data={data} dateRange={dateRangeObj.exercise}></ExerciseChart>
                     <br />
                     <DateRangeSelector data={data} for="exercise" updateDateRange={updateDateRange} currentDateRange={dateRangeObj.exercise} />
-                    <p>Your average time during exercise over this period was {sum(data, "exercise")} minutes.</p>
+                    <p>Your average time during exercise over this period was {sum(data, "exercise", dateRangeObj.exercise)} minutes.</p>
                 </div>
             </div>
             <br /><hr /><br />
