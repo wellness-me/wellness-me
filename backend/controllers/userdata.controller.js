@@ -23,9 +23,9 @@ const createData = async (req, res) => {
 const getData = async (req, res) => {
     logger.info("GET /v1/data/:userID")
 
-    if (req.params.userID === '61a1a08430b9bb89b175a31a') {
+    /*if (req.params.userID === '61a1a08430b9bb89b175a31a') {
         req.params.userID = '617f4aeadfd1687ce38fd532'
-    }
+    }*/
     //remember to remove 
     const dataForUser = await UserData.find({
         "userID": req.params.userID,
