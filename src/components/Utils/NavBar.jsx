@@ -10,7 +10,7 @@ class NavBar extends React.Component {
     return (
       <Navbar collapseOnSelect expand="lg">
       <Container>
-      <Navbar.Brand href="#home" style={{marginLeft:"20px"}}>wellness.me</Navbar.Brand>
+      <Navbar.Brand href="/" style={{marginLeft:"20px"}}>wellness.me</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
