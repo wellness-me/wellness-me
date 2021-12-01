@@ -134,7 +134,7 @@ const SettingsPage = () => {
                     <hr/><br/>
                     <p>Export all your data for your own analysis.</p>
                     <div>
-                        <button class="ui secondary basic button" onClick={downloadJsonFile}>Export as .json</button>
+                        <Button class="ui secondary basic button" onClick={downloadJsonFile}>Export as .json</Button>
                     </div>
                     
                     <br/>
