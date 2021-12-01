@@ -3,7 +3,6 @@ import moment from "moment";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const ExerciseChart = (props) => {
-    //console.log('dateRange at excersice chart', props);
     return (
 
         <ResponsiveContainer width="100%" aspect={2}>

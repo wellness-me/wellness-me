@@ -24,7 +24,6 @@ class UserCustomizableChart extends React.Component {
     }
 
     updateTimeRange(startIndex, endIndex) {
-        console.log('updatin to', startIndex, endIndex);
         this.setState({
             startTimestampIndex: startIndex,
             endTimestampIndex: endIndex,
@@ -59,7 +58,6 @@ class UserCustomizableChart extends React.Component {
                     >
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis range={[this.state.startTimestampIndex, this.state.endTimestampIndex]} dataKey="createdAt" tickFormatter={timeStr => moment(timeStr).format('MMM-D-YY')} />
-                        {console.log([this.state.startTimestampIndex, this.state.endTimestampIndex])}
                         <YAxis width={80} yAxisId="left" tick={{ fontSize: 10 }}>
                             <Label
                                 value={this.state.selectedCategories[0]}

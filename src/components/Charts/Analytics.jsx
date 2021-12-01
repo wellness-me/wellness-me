@@ -10,7 +10,6 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 const Analytics = () => {
-    console.log('re-render analytics');
     const [data, setData] = useState([])
     const [username, setUsername] = useState("")
     const [streak, setStreak] = useState(0)
@@ -55,10 +54,8 @@ const Analytics = () => {
     const updateDateRange = (newDateRange, from) => {
         const updatedDateObject = dateRangeObj;
         updatedDateObject[from] = newDateRange;
-        console.log('updatedDateObject', updatedDateObject, from);
         setDateRangeObj(updatedDateObject);
         setForceReRender(!forceReRender)
-
     }
 
     const getStreak = () => {
