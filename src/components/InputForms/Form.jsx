@@ -40,7 +40,6 @@ const Form = () => {
         if (r.status === 401) {
             history.push("/")
         }
-        //console.log(await r.json())
     }
 
     return (

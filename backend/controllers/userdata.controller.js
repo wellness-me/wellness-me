@@ -7,12 +7,11 @@ const fs = require('fs')
 // from the form for this user
 const createData = async (req, res) => {
     logger.info("POST /v1/data/")
-    // console.log(req.body)
 
     const data = new UserData(req.body)
 
     const result = await UserData.create(data)
-    
+
     res.status(httpStatus.CREATED).send(result)
 }
 
