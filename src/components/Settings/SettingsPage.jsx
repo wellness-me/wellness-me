@@ -131,7 +131,7 @@ const SettingsPage = () => {
 
                 <div style={{flex: 1, marginLeft: "20px", marginRight: "20px"}}>
                     <h4>Account</h4>
-                    <hr/><br/>
+                    <hr/>
                     <p>Export all your data for your own analysis.</p>
                     <div>
                         <button class="ui secondary basic button" onClick={downloadJsonFile}>Export as .json</button>
@@ -144,10 +144,9 @@ const SettingsPage = () => {
                     <p>Delete all data associated to you or completely scrap your account. Warning: cannot be undone!</p>
                     <div>
                         <button onClick={deleteUserData} class="ui negative basic button">Delete Data</button>
-                        <Button onClick={deleteAccount} style={{backgroundColor: 'rgb(209, 26, 42)', color: 'white', justifyContent: "left"}}>Delete Account</Button>
+                        <Button onClick={deleteAccount} style={{backgroundColor: 'rgb(209, 26, 42)', color: 'white', justifyContent: "left", marginTop: "5%"}}>Delete Account</Button>
                     </div>
                 </div>
-                
             </div>
         </div>
     )
