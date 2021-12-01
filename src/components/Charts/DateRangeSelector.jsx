@@ -17,7 +17,7 @@ const DateRangeSelector = (props) => {
             newRange[1] = parseInt(eventKey);
             setToDateIndex(parseInt(eventKey))
         }
-        props.updateDateRange(newRange)
+        props.updateDateRange(newRange, props.for)
     }
 
 
