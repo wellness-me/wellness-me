@@ -17,6 +17,7 @@ import './App.css';
 
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme, GlobalStyles } from './theme';
+import { Button } from 'semantic-ui-react';
 
 const App = () => {
   const [theme, setTheme] = useState("light");
@@ -28,11 +29,11 @@ const App = () => {
       <>
         <GlobalStyles />
           <div className="App">
-            <button onClick={toggleTheme}>
+            <Button onClick={toggleTheme} style={{marginLeft: "18px", marginTop: "10px"}}>
               {isDarkTheme ?
-                <span aria-label="Light mode" role="img">🌞</span> :
-                <span aria-label="Dark mode" role="img">🌜</span>}
-            </button>
+                <span aria-label="Light mode" role="img">Go Light Mode</span> :
+                <span aria-label="Dark mode" role="img">Go Dark Mode</span>}
+            </Button>
             <NavBar className="nav"/>
               <main>
                   <Switch>
