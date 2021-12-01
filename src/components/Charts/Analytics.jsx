@@ -52,10 +52,10 @@ const Analytics = () => {
         }
     }
 
-    const updateDateRange = (newDateRangeObj) => {
+    const updateDateRange = (newDateRange, from) => {
         const updatedDateObject = dateRangeObj;
-        updatedDateObject[newDateRangeObj.from] = newDateRangeObj.dateRange;
-        console.log('updatedDateObject', updatedDateObject);
+        updatedDateObject[from] = newDateRange;
+        console.log('updatedDateObject', updatedDateObject, from);
         setDateRangeObj(updatedDateObject);
         setForceReRender(!forceReRender)
 
@@ -96,7 +96,7 @@ const Analytics = () => {
     const sum = (arr, key, range) => {
         let sum = 0;
         let i;
-        console.log(arr, key, range);
+        //console.log(arr, key, range);
         for (i = range[0]; i < Math.min(range[1] + 1, arr.length); i++) {
             const el = arr[i]
             // if attribute doesn't exist then set to 0
@@ -126,9 +126,9 @@ const Analytics = () => {
                 <div className="happiness-graph" style={{ flex: 1 }}>
                     <h5>Happiness</h5>
                     <br />
-                    <HappinessChart data={data}></HappinessChart>
+                    <HappinessChart data={data} dateRange={dateRangeObj.happiness}></HappinessChart>
                     <br />
-                    <DateRangeSelector />
+                    <DateRangeSelector data={data} for="happiness" updateDateRange={updateDateRange} currentDateRange={dateRangeObj.happiness} />
                     <p>Your average happiness over this period was {sum(data, "happiness", dateRangeObj.happiness)}/100.</p>
                 </div>
                 <div style={{ flex: 1, marginLeft: "65px" }}>
@@ -141,10 +141,10 @@ const Analytics = () => {
                 <div className="sleep graph">
                     <h5>Sleep</h5>
                     <br />
-                    <SleepChart data={data}></SleepChart>
+                    <SleepChart data={data} dateRange={dateRangeObj.sleep}></SleepChart>
                     <br />
-                    <DateRangeSelector />
-                    <p>Your average sleep time over this period was {sum(data, "sleep", dateRangeObj.happiness)} hours.</p>
+                    <DateRangeSelector data={data} for="sleep" updateDateRange={updateDateRange} currentDateRange={dateRangeObj.sleep} />
+                    <p>Your average sleep time over this period was {sum(data, "sleep", dateRangeObj.sleep)} hours.</p>
                 </div>
                 <div className="exercise graph">
                     <h5>Exercise</h5>
